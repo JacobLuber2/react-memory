@@ -19,23 +19,29 @@ items,
 this.handleAnswer = this.handleAnswer.bind(this);
 }
 handleAnswer(event, item, index, answer) {
-this.props.handleScore(item.displayed === answer);
-if(item.displayed === answer) {
-    const items = this.state.items.map((i) => {
-        if(i === item) {
-        if (!i.displayed) {
-        i.displayed = true;
-        return i;
-        }
-     }
-      return i;
+    this.props.handleScore(item.displayed === answer);
+    if(item.displayed === answer) {
+        const items = this.state.items.map((i) => {
+            if(i === item) {
+            if (!i.displayed) {
+            i.displayed = true;
+            return i;
+            }
+         }
+          return i;
+        
+        });
+        this.setState({ items });
+    }else{
+        const items2 = this.state.items.map((i) => {
+            i.displayed = false;
+            return i;
+         });
+         this.setState({ items: items2 });
+    }
     
-    });
-    this.setState({ items });
-}
-
-
-}
+    
+    }
 
 randomItemIndex() {
     let rand = Math.floor(Math.random() * items.length);
