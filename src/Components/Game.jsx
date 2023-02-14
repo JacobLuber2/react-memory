@@ -20,18 +20,20 @@ this.handleAnswer = this.handleAnswer.bind(this);
 }
 handleAnswer(event, item, index, answer) {
 this.props.handleScore(item.displayed === answer);
+if(item.displayed === answer) {
+    const items = this.state.items.map((i) => {
+        if(i === item) {
+        if (!i.displayed) {
+        i.displayed = true;
+        return i;
+        }
+     }
+      return i;
+    
+    });
+    this.setState({ items });
+}
 
-
-const items = this.state.items.map((i) => {
-    if(i === item) {
-    if (i.displayed) {
-    i.displayed = true;
-    return i;
-    }
- } else return i;
-
-});
-this.setState({ items });
 
 }
 
@@ -43,7 +45,9 @@ render() {
 const { items } = this.state;
 const index = this.randomItemIndex()
 const item = items[index];
+console.log(items, item, index)
 return (
+
 <main className="d-flex justify-content-around align-items-center">
 <p id={items.indexOf(item)}>{item.content}</p>
 <Prompt item={item} index={items.indexOf(item)} handleAnswer={this.handleAnswer} />

@@ -15,14 +15,24 @@ class App extends Component {
   }
 
   handleScore(increment) {
+    let newBestScore = this.state.bestScore;
     if(increment) {
+      if (newBestScore < this.state.currentScore + 1) {
+        newBestScore = this.state.currentScore + 1
+        }
       this.setState({
-      currentScore: this.state.currentScore + 1,
+      currentScore: this.state.currentScore + 1, bestScore: newBestScore 
     });
   } else {
     this.setState({
-      currentSCore: 0,
+      
+      currentScore: 0, bestScore: newBestScore
   });
+  const items2 = this.state.items.map((i) => {
+    i.displayed = false;
+    return i;
+ });
+ this.setState({ items: items2 });
 }
 }
 render() {
@@ -36,3 +46,4 @@ return (
 }
 }
 export default App;
+
